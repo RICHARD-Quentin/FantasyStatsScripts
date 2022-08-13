@@ -1,13 +1,9 @@
 import json
 import os
 import shutil
-import urllib.request
 from datetime import datetime
-
 import requests
 import pandas as pd
-from bs4 import BeautifulSoup
-from html.parser import HTMLParser
 
 TOP = 0
 JUNGLE = 1
@@ -25,52 +21,22 @@ pd.set_option('display.max_colwidth', None)
 def initData(cookie):
     ligues = ['lec', 'lfl']
 
-    # initItems(cookie)
-
     for ligue in ligues:
         getItems(ligue, cookie)
         getPlayers(ligue, cookie)
         getMatchs(ligue, cookie)
         getGamesResult(ligue, cookie)
 
+def initDataLeague(cookie, ligue):
+        getItems(ligue, cookie)
+        getPlayers(ligue, cookie)
+        getMatchs(ligue, cookie)
+        getGamesResult(ligue, cookie)
 
 def initItems(cookie):
     getItemsLec(cookie)
     getItemsLfl(cookie)
 
-def getItems(ligue, cookie):
-    r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/itemcards', headers={
-        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-        'origin': 'https://' + ligue + '.superfantasylol.com',
-        'referer': 'https://' + ligue + '.superfantasylol.com',
-        'content-language': 'fr'
-
-    })
-    result = json.loads(r.text)
-
-    # ecriture des logs
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
-    with open(ligue + '-items2.json', 'w+') as outfile:
-        json.dump(result.get('data'), outfile, default=str)
-
-    print('Items ' + ligue + ' importés')
-
-def getPlayers(ligue, cookie):
-    r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/playerinfos', headers={
-        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-        'origin': 'https://' + ligue + '.superfantasylol.com',
-        'referer': 'https://' + ligue + '.superfantasylol.com',
-        'content-language': 'fr'
-
-    })
-    result = json.loads(r.text)
-
-    # ecriture des logs
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
-    with open(ligue + '-players.json', 'w+') as outfile:
-        json.dump(result.get('data'), outfile, default=str)
-
-    print('Items ' + ligue + ' importés')
 
 def getItemsLec(cookie):
     r = requests.get('https://api-lec.superfantasylol.com/api/v1/games/83032160-ec93-11ec-9e84-06f414ba766d', headers={
@@ -108,6 +74,42 @@ def getItemsLfl(cookie):
     print('Items lfl importés')
 
 
+def getItems(ligue, cookie):
+    r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/itemcards', headers={
+        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+        'origin': 'https://' + ligue + '.superfantasylol.com',
+        'referer': 'https://' + ligue + '.superfantasylol.com',
+        'content-language': 'fr'
+
+    })
+    result = json.loads(r.text)
+
+    # ecriture des logs
+    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    with open(ligue + '-items2.json', 'w+') as outfile:
+        json.dump(result.get('data'), outfile, default=str)
+
+    print('Items ' + ligue + ' importés')
+
+
+def getPlayers(ligue, cookie):
+    r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/playerinfos', headers={
+        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+        'origin': 'https://' + ligue + '.superfantasylol.com',
+        'referer': 'https://' + ligue + '.superfantasylol.com',
+        'content-language': 'fr'
+
+    })
+    result = json.loads(r.text)
+
+    # ecriture des logs
+    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    with open(ligue + '-players.json', 'w+') as outfile:
+        json.dump(result.get('data'), outfile, default=str)
+
+    print('Items ' + ligue + ' importés')
+
+
 def getMatchs(ligue, cookie):
     r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/gamedays', headers={
         'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
@@ -120,15 +122,16 @@ def getMatchs(ligue, cookie):
     for game in result:
         for match in game.get('matches'):
             if len(match.get('games')) > 0:
-                gamesId.append(match.get('games')[0].get('id'))
+                for game in match.get('games'):
+                    gamesId.append(game.get('id'))
     gamesId.reverse()
-    #
+
     # #ecriture des logs
     os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
     with open(ligue + '-matchs.json', 'w+') as outfile:
         json.dump(gamesId, outfile, default=str)
 
-    print('Matchs' + ligue + ' importés')
+    print('Matchs ' + ligue + ' importés')
 
 
 def getGamesResult(ligue, cookie):
@@ -151,6 +154,9 @@ def getGamesResult(ligue, cookie):
 
             result = json.loads(r.text).get('data')
             if result is not None:
+                local = result.get('local').get('team').get('shortName')
+                visitor = result.get('visitor').get('team').get('shortName')
+                print_message = local + ' - ' + visitor
                 top.append({
                     'playerId': result.get('local').get('players')[TOP].get('player').get('nickname'),
                     'items': result.get('local').get('players')[TOP].get('items')
@@ -205,22 +211,7 @@ def getGamesResult(ligue, cookie):
                     'items': result.get('visitor').get('players')[COACH].get('items')
                 })
 
-                # jungle.append(result.get('local').get('players')[JUNGLE].get('items'))
-                # jungle.append(result.get('visitor').get('players')[JUNGLE].get('items'))
-                #
-                # mid.append(result.get('local').get('players')[MID].get('items'))
-                # mid.append(result.get('visitor').get('players')[MID].get('items'))
-                #
-                # adc.append(result.get('local').get('players')[ADC].get('items'))
-                # adc.append(result.get('visitor').get('players')[ADC].get('items'))
-                #
-                # supp.append(result.get('local').get('players')[SUPP].get('items'))
-                # supp.append(result.get('visitor').get('players')[SUPP].get('items'))
-                #
-                # coach.append(result.get('local').get('players')[COACH].get('items'))
-                # coach.append(result.get('visitor').get('players')[COACH].get('items'))
-
-            print('Import game ' + id + ' terminé')
+                print('Import game ' + print_message + ' terminé')
     result = {
         'top': top,
         'jungler': jungle,
@@ -236,7 +227,6 @@ def getGamesResult(ligue, cookie):
 
 
 def getStats(role, ligue, action):
-    stats = {}
     os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
     with open('./' + ligue + '-itemsResults2.json') as results:
         roleResult = []
@@ -297,9 +287,9 @@ def getStats(role, ligue, action):
         os.makedirs('./' + ligue + '/' + role, exist_ok=True)
         pd.DataFrame(object).T.sort_values('pts moy total', ascending=False).to_csv('./' + ligue + '/' + role + '/all.csv',
                                                                                     index=True)
-def getStatsByPlayer(role, ligue):
-    stats = {}
 
+
+def getStatsByPlayer(role, ligue):
     os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
     with open(ligue + '-players.json') as players:
         playersData = json.load(players)
