@@ -19,7 +19,7 @@ pd.set_option('display.max_colwidth', None)
 
 
 def initData(cookie):
-    ligues = ['lec', 'lfl']
+    ligues = ['lec', 'lfl', 'superliga']
 
     for ligue in ligues:
         getItems(ligue, cookie)
@@ -27,61 +27,30 @@ def initData(cookie):
         getMatchs(ligue, cookie)
         getGamesResult(ligue, cookie)
 
+
 def initDataLeague(cookie, ligue):
-        getItems(ligue, cookie)
-        getPlayers(ligue, cookie)
-        getMatchs(ligue, cookie)
-        getGamesResult(ligue, cookie)
-
-def initItems(cookie):
-    getItemsLec(cookie)
-    getItemsLfl(cookie)
-
-
-def getItemsLec(cookie):
-    r = requests.get('https://api-lec.superfantasylol.com/api/v1/games/83032160-ec93-11ec-9e84-06f414ba766d', headers={
-        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-        'origin': 'https://lec.superfantasylol.com',
-        'referer': 'https://lec.superfantasylol.com/',
-        'content-language': 'fr'
-
-    })
-    result = json.loads(r.text)
-
-    # ecriture des logs
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
-    with open('lec-items.json', 'w+') as outfile:
-        json.dump(result.get('data').get('itemCards'), outfile, default=str)
-
-    print('Items lec importés')
-
-
-def getItemsLfl(cookie):
-    r = requests.get('https://api-lfl.superfantasylol.com/api/v1/games/4a6f97b2-dff6-11ec-9e84-06f414ba766d', headers={
-        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-        'origin': 'https://lfl.superfantasylol.com',
-        'referer': 'https://lfl.superfantasylol.com/',
-        'content-language': 'fr'
-
-    })
-    result = json.loads(r.text)
-
-    # ecriture des logs
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
-    with open('lfl-items.json', 'w+') as outfile:
-        json.dump(result.get('data').get('itemCards'), outfile, default=str)
-
-    print('Items lfl importés')
+    getItems(ligue, cookie)
+    getPlayers(ligue, cookie)
+    getMatchs(ligue, cookie)
+    getGamesResult(ligue, cookie)
 
 
 def getItems(ligue, cookie):
-    r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/itemcards', headers={
-        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-        'origin': 'https://' + ligue + '.superfantasylol.com',
-        'referer': 'https://' + ligue + '.superfantasylol.com',
-        'content-language': 'fr'
+    if ligue == 'superliga':
+        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/itemcards', headers={
+            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+            'origin': 'https://' + 'lvp' + '.superfantasylol.com',
+            'referer': 'https://' + 'lvp' + '.superfantasylol.com/',
+            'content-language': 'fr'
+        })
+    else :
+        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/itemcards', headers={
+            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+            'origin': 'https://' + ligue + '.superfantasylol.com',
+            'referer': 'https://' + ligue + '.superfantasylol.com',
+            'content-language': 'fr'
 
-    })
+        })
     result = json.loads(r.text)
 
     # ecriture des logs
@@ -93,13 +62,20 @@ def getItems(ligue, cookie):
 
 
 def getPlayers(ligue, cookie):
-    r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/playerinfos', headers={
-        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-        'origin': 'https://' + ligue + '.superfantasylol.com',
-        'referer': 'https://' + ligue + '.superfantasylol.com',
-        'content-language': 'fr'
-
-    })
+    if ligue == 'superliga':
+        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/playerinfos', headers={
+            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+            'origin': 'https://' + 'lvp' + '.superfantasylol.com',
+            'referer': 'https://' + 'lvp' + '.superfantasylol.com/',
+            'content-language': 'fr'
+        })
+    else :
+        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/playerinfos', headers={
+            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+            'origin': 'https://' + ligue + '.superfantasylol.com',
+            'referer': 'https://' + ligue + '.superfantasylol.com',
+            'content-language': 'fr'
+        })
     result = json.loads(r.text)
 
     # ecriture des logs
@@ -107,16 +83,24 @@ def getPlayers(ligue, cookie):
     with open(ligue + '-players.json', 'w+') as outfile:
         json.dump(result.get('data'), outfile, default=str)
 
-    print('Items ' + ligue + ' importés')
+    print('Players ' + ligue + ' importés')
 
 
 def getMatchs(ligue, cookie):
-    r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/gamedays', headers={
-        'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-        'origin': 'https://' + ligue + '.superfantasylol.com',
-        'referer': 'https://' + ligue + '.superfantasylol.com/',
-        'content-language': 'fr'
-    })
+    if ligue == 'superliga':
+        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/gamedays', headers={
+            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+            'origin': 'https://' + 'lvp' + '.superfantasylol.com',
+            'referer': 'https://' + 'lvp' + '.superfantasylol.com/',
+            'content-language': 'fr'
+        })
+    else :
+        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/gamedays', headers={
+            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+            'origin': 'https://' + ligue + '.superfantasylol.com',
+            'referer': 'https://' + ligue + '.superfantasylol.com/',
+            'content-language': 'fr'
+        })
     result = json.loads(r.text).get('data')
     gamesId = []
     for game in result:
@@ -145,12 +129,20 @@ def getGamesResult(ligue, cookie):
         coach = []
         matchesId = json.load(data)
         for id in matchesId:
-            r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/games/' + id, headers={
-                'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-                'origin': 'https://' + ligue + '.superfantasylol.com',
-                'referer': 'https://' + ligue + '.superfantasylol.com/',
-                'content-language': 'fr'
-            })
+            if ligue == 'superliga':
+                r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/games/' + id, headers={
+                    'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+                    'origin': 'https://' + 'lvp' + '.superfantasylol.com',
+                    'referer': 'https://' + 'lvp' + '.superfantasylol.com/',
+                    'content-language': 'fr'
+                })
+            else:
+                r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/games/' + id, headers={
+                    'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
+                    'origin': 'https://' + ligue + '.superfantasylol.com',
+                    'referer': 'https://' + ligue + '.superfantasylol.com/',
+                    'content-language': 'fr'
+                })
 
             result = json.loads(r.text).get('data')
             if result is not None:
@@ -277,7 +269,6 @@ def getStats(role, ligue, action):
                 else:
                     object[name]["pts par cout total"] = 'Gratuit'
 
-
     if action == 'show':
         print('Data des ' + role + 's en ' + ligue)
         print(pd.DataFrame(object).T.sort_values('pts moy total', ascending=False))
@@ -352,7 +343,8 @@ def getStatsByPlayer(role, ligue):
                             object[name]["pts par cout total"] = round(object[name]["pts moy total"] / object[name]["cout"], 2)
                         else:
                             object[name]["pts par cout total"] = 'Gratuit'
-
+                        object[name]["pts par cout moy+1"] = round(object[name]["pts moy"] / (object[name]["cout"]+1), 2)
+                        object[name]["pts par cout total+1"] = round(object[name]["pts moy total"] / (object[name]["cout"]+1), 2)
 
             os.chdir('C:/Users/Quentin/PycharmProjects/fantasy/data')
             os.makedirs('./' + ligue + '/' + role, exist_ok=True)
