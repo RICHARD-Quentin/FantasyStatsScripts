@@ -1,3 +1,4 @@
+#/bin/python3
 import json
 import os
 import shutil
@@ -17,6 +18,9 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
 pd.set_option('display.max_colwidth', None)
 
+project_path = '~/Documents/FantasyStatsScripts'
+base_path = os.path.expanduser(project_path)
+data_path = os.path.join(base_path, 'FantasyStats')
 
 def initData(cookie):
     ligues = ['lec', 'lfl', 'superliga']
@@ -54,7 +58,7 @@ def getItems(ligue, cookie):
     result = json.loads(r.text)
 
     # ecriture des logs
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    os.chdir(base_path)
     with open(ligue + '-items2.json', 'w+') as outfile:
         json.dump(result.get('data'), outfile, default=str)
 
@@ -79,7 +83,7 @@ def getPlayers(ligue, cookie):
     result = json.loads(r.text)
 
     # ecriture des logs
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    os.chdir(base_path)
     with open(ligue + '-players.json', 'w+') as outfile:
         json.dump(result.get('data'), outfile, default=str)
 
@@ -111,7 +115,7 @@ def getMatchs(ligue, cookie):
     gamesId.reverse()
 
     # #ecriture des logs
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    os.chdir(base_path)
     with open(ligue + '-matchs.json', 'w+') as outfile:
         json.dump(gamesId, outfile, default=str)
 
@@ -119,7 +123,7 @@ def getMatchs(ligue, cookie):
 
 
 def getGamesResult(ligue, cookie):
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    os.chdir(base_path)
     with open(ligue + '-matchs.json') as data:
         top = []
         jungle = []
@@ -219,7 +223,7 @@ def getGamesResult(ligue, cookie):
 
 
 def getStats(role, ligue, action):
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    os.chdir(base_path)
     with open('./' + ligue + '-itemsResults2.json') as results:
         roleResult = []
         for result in json.load(results).get(role):
@@ -274,14 +278,14 @@ def getStats(role, ligue, action):
         print(pd.DataFrame(object).T.sort_values('pts moy total', ascending=False))
         print('\n')
     elif action == 'register':
-        os.chdir('C:/Users/Quentin/PycharmProjects/fantasy/data')
+        os.chdir(data_path)
         os.makedirs('./' + ligue + '/' + role, exist_ok=True)
         pd.DataFrame(object).T.sort_values('pts moy total', ascending=False).to_csv('./' + ligue + '/' + role + '/all.csv',
                                                                                     index=True)
 
 
 def getStatsByPlayer(role, ligue):
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+    os.chdir(base_path)
     with open(ligue + '-players.json') as players:
         playersData = json.load(players)
         playersByRole = []
@@ -293,7 +297,7 @@ def getStatsByPlayer(role, ligue):
             playerNickname = player.get('nickname')
             # print(playerNickname)
 
-            os.chdir('C:/Users/Quentin/PycharmProjects/fantasy')
+            os.chdir(base_path)
             with open('./' + ligue + '-itemsResults2.json') as results:
                 roleResult = []
                 for result in json.load(results).get(role):
@@ -345,14 +349,13 @@ def getStatsByPlayer(role, ligue):
                             object[name]["pts par cout total"] = 'Gratuit'
                         object[name]["pts par cout moy+1"] = round(object[name]["pts moy"] / (object[name]["cout"]+1), 2)
                         object[name]["pts par cout total+1"] = round(object[name]["pts moy total"] / (object[name]["cout"]+1), 2)
-
-            os.chdir('C:/Users/Quentin/PycharmProjects/fantasy/data')
+            os.chdir(data_path)
             os.makedirs('./' + ligue + '/' + role, exist_ok=True)
             pd.DataFrame(object).T.sort_values('pts moy total', ascending=False).to_csv('./' + ligue + '/' + role + '/' + playerNickname + '.csv',
                                                                                         index=True)
 
 def zip_files(ligue):
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy/data')
+    os.chdir(data_path)
     shutil.make_archive(ligue, 'zip', './' + ligue)
     print('Zip créé')
     shutil.move(ligue + '.zip', './' + ligue + '/' + ligue + '.zip')
@@ -360,7 +363,7 @@ def zip_files(ligue):
 
 def release():
     tag = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    os.chdir('C:/Users/Quentin/PycharmProjects/fantasy/data')
+    os.chdir(data_path)
     os.system('git add .')
     os.system('git commit -m "release"')
     os.system('git pull')
