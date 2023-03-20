@@ -1,0 +1,235 @@
+2023-03-15 22:29:03,203 - auto release
+2023-03-15 22:29:03,204 - check release n°1
+2023-03-15 22:29:03,204 - isFinished {'lec': False, 'lfl': False, 'superliga': False}
+2023-03-15 22:29:03,584 - Check end gameday lec
+2023-03-15 22:29:03,587 - Aucun match n'est prévu aujourd'hui
+2023-03-15 22:29:03,909 - Check end gameday lfl
+2023-03-15 22:29:03,910 - Matchs a jouer :
+2023-03-15 22:29:03,910 - 2023-03-15T17:00:00.000Z - BK ROG - IziDream - COMPUTED
+2023-03-15 22:29:03,910 - 2023-03-15T18:00:00.000Z - LDLC OL - Vitality.Bee - COMPUTED
+2023-03-15 22:29:03,911 - 2023-03-15T19:00:00.000Z - Karmine Corp - Aegis - COMPUTED
+2023-03-15 22:29:03,911 - 2023-03-15T20:00:00.000Z - Solary - Team GO - COMPUTED
+2023-03-15 22:29:03,911 - 2023-03-15T21:00:00.000Z - GameWard - BDS Academy - SCHEDULED
+2023-03-15 22:29:03,911 - Il reste des matchs à jouer
+2023-03-15 22:29:04,237 - Check end gameday superliga
+2023-03-15 22:29:04,238 - Matchs a jouer :
+2023-03-15 22:29:04,239 - 2023-03-14T17:00:00.000Z - Fnatic TQ - BISONS ECLUB - COMPUTED
+2023-03-15 22:29:04,239 - 2023-03-15T17:00:00.000Z - Barça eSports - Movistar Riders - COMPUTED
+2023-03-15 22:29:04,240 - Tous les matchs sont terminés
+2023-03-15 22:29:04,241 - manual release ligue superliga
+2023-03-15 22:29:12,618 - zip créé
+2023-03-15 22:29:14,581 - release superliga terminé
+2023-03-15 22:29:14,581 - check release n°2 : True
+2023-03-15 22:39:14,682 - check release n°2
+2023-03-15 22:39:14,682 - isFinished {'lec': False, 'lfl': False, 'superliga': False}
+2023-03-15 22:39:15,253 - Check end gameday lec
+2023-03-15 22:39:15,256 - Aucun match n'est prévu aujourd'hui
+2023-03-15 22:39:15,448 - Check end gameday lfl
+2023-03-15 22:39:15,449 - Matchs a jouer :
+2023-03-15 22:39:15,449 - 2023-03-15T17:00:00.000Z - BK ROG - IziDream - COMPUTED
+2023-03-15 22:39:15,450 - 2023-03-15T18:00:00.000Z - LDLC OL - Vitality.Bee - COMPUTED
+2023-03-15 22:39:15,450 - 2023-03-15T19:00:00.000Z - Karmine Corp - Aegis - COMPUTED
+2023-03-15 22:39:15,450 - 2023-03-15T20:00:00.000Z - Solary - Team GO - COMPUTED
+2023-03-15 22:39:15,451 - 2023-03-15T21:00:00.000Z - GameWard - BDS Academy - SCHEDULED
+2023-03-15 22:39:15,451 - Il reste des matchs à jouer
+2023-03-15 22:39:15,780 - Check end gameday superliga
+2023-03-15 22:39:15,782 - Matchs a jouer :
+2023-03-15 22:39:15,783 - 2023-03-14T17:00:00.000Z - Fnatic TQ - BISONS ECLUB - COMPUTED
+2023-03-15 22:39:15,784 - 2023-03-15T17:00:00.000Z - Barça eSports - Movistar Riders - COMPUTED
+2023-03-15 22:39:15,784 - Tous les matchs sont terminés
+2023-03-15 22:39:15,786 - manual release ligue superliga
+2023-03-15 22:39:24,365 - zip créé
+2023-03-15 22:39:26,192 - release superliga terminé
+2023-03-15 22:39:26,192 - check release n°3 : True
+2023-03-15 22:49:26,293 - check release n°3
+2023-03-15 22:49:26,294 - isFinished {'lec': False, 'lfl': False, 'superliga': False}
+2023-03-15 22:49:26,601 - Check end gameday lec
+2023-03-15 22:49:26,602 - Aucun match n'est prévu aujourd'hui
+2023-03-15 22:49:26,787 - Check end gameday lfl
+2023-03-15 22:49:26,787 - Matchs a jouer :
+2023-03-15 22:49:26,788 - 2023-03-15T17:00:00.000Z - BK ROG - IziDream - COMPUTED
+2023-03-15 22:49:26,788 - 2023-03-15T18:00:00.000Z - LDLC OL - Vitality.Bee - COMPUTED
+2023-03-15 22:49:26,788 - 2023-03-15T19:00:00.000Z - Karmine Corp - Aegis - COMPUTED
+2023-03-15 22:49:26,788 - 2023-03-15T20:00:00.000Z - Solary - Team GO - COMPUTED
+2023-03-15 22:49:26,788 - 2023-03-15T21:00:00.000Z - GameWard - BDS Academy - COMPUTED
+2023-03-15 22:49:26,789 - Tous les matchs sont terminés
+2023-03-15 22:49:26,789 - manual release ligue lfl
+2023-03-15 22:49:42,721 - zip créé
+2023-03-15 22:49:44,681 - release lfl terminé
+2023-03-15 22:49:44,907 - Check end gameday superliga
+2023-03-15 22:49:44,908 - Matchs a jouer :
+2023-03-15 22:49:44,909 - 2023-03-14T17:00:00.000Z - Fnatic TQ - BISONS ECLUB - COMPUTED
+2023-03-15 22:49:44,909 - 2023-03-15T17:00:00.000Z - Barça eSports - Movistar Riders - COMPUTED
+2023-03-15 22:49:44,909 - Tous les matchs sont terminés
+2023-03-15 22:49:44,910 - manual release ligue superliga
+2023-03-15 22:49:53,340 - zip créé
+2023-03-15 22:49:55,055 - release superliga terminé
+2023-03-15 22:49:55,056 - check release n°4 : False
+2023-03-15 22:53:53,847 - release ligue lec
+2023-03-15 22:53:53,848 - Importation des données pour la ligue : lec
+2023-03-15 22:53:57,721 - zip créé
+2023-03-15 22:54:04,696 - release lec terminé
+2023-03-15 22:54:04,698 - release ligue lfl
+2023-03-15 22:54:04,699 - Importation des données pour la ligue : lfl
+2023-03-15 22:54:15,408 - zip créé
+2023-03-15 22:54:20,680 - release lfl terminé
+2023-03-15 22:54:20,681 - release ligue superliga
+2023-03-15 22:54:20,681 - Importation des données pour la ligue : superliga
+2023-03-15 22:54:28,467 - zip créé
+2023-03-15 22:54:34,413 - release superliga terminé
+2023-03-16 22:29:02,724 - auto release
+2023-03-16 22:29:02,724 - check release n°1
+2023-03-16 22:29:02,724 - isFinished {'lec': False, 'lfl': False, 'superliga': False}
+2023-03-16 22:29:03,131 - Check end gameday lec
+2023-03-16 22:29:03,134 - Aucun match n'est prévu aujourd'hui
+2023-03-16 22:29:03,372 - Check end gameday lfl
+2023-03-16 22:29:03,373 - Matchs a jouer :
+2023-03-16 22:29:03,373 - 2023-03-16T17:00:00.000Z - GameWard - IziDream - COMPUTED
+2023-03-16 22:29:03,373 - 2023-03-16T18:00:00.000Z - Aegis - Vitality.Bee - COMPUTED
+2023-03-16 22:29:03,373 - 2023-03-16T19:00:00.000Z - Team GO - Karmine Corp - COMPUTED
+2023-03-16 22:29:03,373 - 2023-03-16T20:00:00.000Z - BDS Academy - LDLC OL - COMPUTED
+2023-03-16 22:29:03,374 - 2023-03-16T21:00:00.000Z - Solary - BK ROG - SCHEDULED
+2023-03-16 22:29:03,374 - Il reste des matchs à jouer
+2023-03-16 22:29:03,766 - Check end gameday superliga
+2023-03-16 22:29:03,770 - Aucun match n'est prévu aujourd'hui
+2023-03-16 22:29:03,772 - check release n°2 : True
+2023-03-16 22:39:03,825 - check release n°2
+2023-03-16 22:39:03,826 - isFinished {'lec': True, 'lfl': False, 'superliga': True}
+2023-03-16 22:39:04,351 - Check end gameday lfl
+2023-03-16 22:39:04,352 - Matchs a jouer :
+2023-03-16 22:39:04,352 - 2023-03-16T17:00:00.000Z - GameWard - IziDream - COMPUTED
+2023-03-16 22:39:04,353 - 2023-03-16T18:00:00.000Z - Aegis - Vitality.Bee - COMPUTED
+2023-03-16 22:39:04,353 - 2023-03-16T19:00:00.000Z - Team GO - Karmine Corp - COMPUTED
+2023-03-16 22:39:04,353 - 2023-03-16T20:00:00.000Z - BDS Academy - LDLC OL - COMPUTED
+2023-03-16 22:39:04,354 - 2023-03-16T21:00:00.000Z - Solary - BK ROG - SCHEDULED
+2023-03-16 22:39:04,354 - Il reste des matchs à jouer
+2023-03-16 22:39:04,355 - check release n°3 : True
+2023-03-16 22:49:04,456 - check release n°3
+2023-03-16 22:49:04,456 - isFinished {'lec': True, 'lfl': False, 'superliga': True}
+2023-03-16 22:49:04,970 - Check end gameday lfl
+2023-03-16 22:49:04,971 - Matchs a jouer :
+2023-03-16 22:49:04,971 - 2023-03-16T17:00:00.000Z - GameWard - IziDream - COMPUTED
+2023-03-16 22:49:04,971 - 2023-03-16T18:00:00.000Z - Aegis - Vitality.Bee - COMPUTED
+2023-03-16 22:49:04,972 - 2023-03-16T19:00:00.000Z - Team GO - Karmine Corp - COMPUTED
+2023-03-16 22:49:04,973 - 2023-03-16T20:00:00.000Z - BDS Academy - LDLC OL - COMPUTED
+2023-03-16 22:49:04,973 - 2023-03-16T21:00:00.000Z - Solary - BK ROG - SCHEDULED
+2023-03-16 22:49:04,974 - Il reste des matchs à jouer
+2023-03-16 22:49:04,975 - check release n°4 : True
+2023-03-16 22:59:05,076 - check release n°4
+2023-03-16 22:59:05,077 - isFinished {'lec': True, 'lfl': False, 'superliga': True}
+2023-03-16 22:59:05,461 - Check end gameday lfl
+2023-03-16 22:59:05,462 - Matchs a jouer :
+2023-03-16 22:59:05,462 - 2023-03-16T17:00:00.000Z - GameWard - IziDream - COMPUTED
+2023-03-16 22:59:05,462 - 2023-03-16T18:00:00.000Z - Aegis - Vitality.Bee - COMPUTED
+2023-03-16 22:59:05,462 - 2023-03-16T19:00:00.000Z - Team GO - Karmine Corp - COMPUTED
+2023-03-16 22:59:05,462 - 2023-03-16T20:00:00.000Z - BDS Academy - LDLC OL - COMPUTED
+2023-03-16 22:59:05,462 - 2023-03-16T21:00:00.000Z - Solary - BK ROG - COMPUTED
+2023-03-16 22:59:05,463 - Tous les matchs sont terminés
+2023-03-16 22:59:05,463 - release ligue lfl
+2023-03-16 22:59:05,463 - Importation des données pour la ligue : lfl
+2023-03-16 22:59:15,825 - zip créé
+2023-03-16 22:59:17,553 - release lfl terminé
+2023-03-16 22:59:17,554 - check release n°5 : False
+2023-03-16 23:29:00,561 - release ligue lec
+2023-03-16 23:29:00,561 - Importation des données pour la ligue : lec
+2023-03-16 23:29:05,314 - zip créé
+2023-03-16 23:29:10,469 - release lec terminé
+2023-03-16 23:29:10,469 - release ligue lfl
+2023-03-16 23:29:10,470 - Importation des données pour la ligue : lfl
+2023-03-16 23:29:22,704 - zip créé
+2023-03-16 23:29:27,676 - release lfl terminé
+2023-03-16 23:29:27,677 - release ligue superliga
+2023-03-16 23:29:27,678 - Importation des données pour la ligue : superliga
+2023-03-16 23:29:36,181 - zip créé
+2023-03-16 23:29:41,756 - release superliga terminé
+2023-03-16 23:30:07,396 - auto release
+2023-03-16 23:30:07,396 - check release n°1
+2023-03-16 23:30:07,396 - isFinished {'lec': False, 'lfl': False, 'superliga': False}
+2023-03-16 23:30:07,578 - Check end gameday lec
+2023-03-16 23:30:07,581 - Aucun match n'est prévu aujourd'hui
+2023-03-16 23:30:07,730 - Check end gameday lfl
+2023-03-16 23:30:07,730 - Matchs a jouer :
+2023-03-16 23:30:07,731 - 2023-03-16T17:00:00.000Z - GameWard - IziDream - COMPUTED
+2023-03-16 23:30:07,732 - 2023-03-16T18:00:00.000Z - Aegis - Vitality.Bee - COMPUTED
+2023-03-16 23:30:07,732 - 2023-03-16T19:00:00.000Z - Team GO - Karmine Corp - COMPUTED
+2023-03-16 23:30:07,732 - 2023-03-16T20:00:00.000Z - BDS Academy - LDLC OL - COMPUTED
+2023-03-16 23:30:07,733 - 2023-03-16T21:00:00.000Z - Solary - BK ROG - COMPUTED
+2023-03-16 23:30:07,733 - Tous les matchs sont terminés
+2023-03-16 23:30:07,734 - release ligue lfl
+2023-03-16 23:30:07,735 - Importation des données pour la ligue : lfl
+2023-03-16 23:30:18,380 - zip créé
+2023-03-16 23:30:23,789 - release lfl terminé
+2023-03-16 23:30:24,015 - Check end gameday superliga
+2023-03-16 23:30:24,017 - Aucun match n'est prévu aujourd'hui
+2023-03-16 23:30:24,018 - check release n°2 : False
+2023-03-20 08:52:39,071 - release ligue lec
+2023-03-20 08:52:39,072 - Importation des données pour la ligue : lec
+2023-03-20 08:52:39,081 - Starting new HTTPS connection (1): api-lec.superfantasylol.com:443
+2023-03-20 08:52:39,436 - https://api-lec.superfantasylol.com:443 "GET /api/v1/itemcards HTTP/1.1" 200 None
+2023-03-20 08:52:39,493 - Starting new HTTPS connection (1): api-lec.superfantasylol.com:443
+2023-03-20 08:52:39,643 - https://api-lec.superfantasylol.com:443 "GET /api/v1/playerinfos HTTP/1.1" 200 None
+2023-03-20 08:52:39,685 - Starting new HTTPS connection (1): api-lec.superfantasylol.com:443
+2023-03-20 08:52:39,826 - https://api-lec.superfantasylol.com:443 "GET /api/v1/gamedays HTTP/1.1" 200 None
+2023-03-20 08:52:39,833 - Using selector: EpollSelector
+2023-03-20 08:52:43,408 - zip créé
+2023-03-20 08:52:48,571 - release lec terminé
+2023-03-20 08:52:48,572 - release ligue lfl
+2023-03-20 08:52:48,573 - Importation des données pour la ligue : lfl
+2023-03-20 08:52:48,581 - Starting new HTTPS connection (1): api-lfl.superfantasylol.com:443
+2023-03-20 08:52:49,046 - https://api-lfl.superfantasylol.com:443 "GET /api/v1/itemcards HTTP/1.1" 200 None
+2023-03-20 08:52:49,086 - Starting new HTTPS connection (1): api-lfl.superfantasylol.com:443
+2023-03-20 08:52:49,581 - https://api-lfl.superfantasylol.com:443 "GET /api/v1/playerinfos HTTP/1.1" 200 None
+2023-03-20 08:52:49,718 - Starting new HTTPS connection (1): api-lfl.superfantasylol.com:443
+2023-03-20 08:52:50,073 - https://api-lfl.superfantasylol.com:443 "GET /api/v1/gamedays HTTP/1.1" 200 None
+2023-03-20 08:52:50,082 - Using selector: EpollSelector
+2023-03-20 08:52:58,436 - zip créé
+2023-03-20 08:53:03,932 - release lfl terminé
+2023-03-20 08:53:03,932 - release ligue superliga
+2023-03-20 08:53:03,933 - Importation des données pour la ligue : superliga
+2023-03-20 08:53:03,937 - Starting new HTTPS connection (1): api-superliga.superfantasylol.com:443
+2023-03-20 08:53:04,214 - https://api-superliga.superfantasylol.com:443 "GET /api/v1/itemcards HTTP/1.1" 200 None
+2023-03-20 08:53:04,274 - Starting new HTTPS connection (1): api-superliga.superfantasylol.com:443
+2023-03-20 08:53:04,515 - https://api-superliga.superfantasylol.com:443 "GET /api/v1/playerinfos HTTP/1.1" 200 None
+2023-03-20 08:53:04,560 - Starting new HTTPS connection (1): api-superliga.superfantasylol.com:443
+2023-03-20 08:53:04,862 - https://api-superliga.superfantasylol.com:443 "GET /api/v1/gamedays HTTP/1.1" 200 None
+2023-03-20 08:53:04,874 - Using selector: EpollSelector
+2023-03-20 08:53:13,246 - zip créé
+2023-03-20 08:53:18,672 - release superliga terminé
+2023-03-20 22:55:53,099 - auto release
+2023-03-20 22:55:53,099 - check release n°1
+2023-03-20 22:55:53,099 - isFinished {'lec': False, 'lfl': False, 'superliga': False}
+2023-03-20 22:55:53,106 - Starting new HTTPS connection (1): api-lec.superfantasylol.com:443
+2023-03-20 22:55:53,447 - https://api-lec.superfantasylol.com:443 "GET /api/v1/gamedays HTTP/1.1" 200 None
+2023-03-20 22:55:53,453 - Check end gameday lec
+2023-03-20 22:55:53,456 - Matchs a jouer :
+2023-03-20 22:55:53,456 - 2023-03-20T17:00:00.000Z - Excel Esports - SK Gaming - COMPUTED
+2023-03-20 22:55:53,457 - 2023-03-20T18:00:00.000Z - MAD Lions - Team Heretics - COMPUTED
+2023-03-20 22:55:53,457 - 2023-03-20T19:00:00.000Z - Astralis - Team Vitality - COMPUTED
+2023-03-20 22:55:53,457 - 2023-03-20T20:00:00.000Z - Team BDS - G2 Esports - COMPUTED
+2023-03-20 22:55:53,458 - 2023-03-20T21:00:00.000Z - Fnatic - KOI - COMPUTED
+2023-03-20 22:55:53,458 - Tous les matchs sont terminés
+2023-03-20 22:55:53,459 - lec {'matchDay': True, 'dayFinished': True}
+2023-03-20 22:55:53,459 - release ligue lec
+2023-03-20 22:55:53,459 - Importation des données pour la ligue : lec
+2023-03-20 22:55:53,463 - Starting new HTTPS connection (1): api-lec.superfantasylol.com:443
+2023-03-20 22:55:53,608 - https://api-lec.superfantasylol.com:443 "GET /api/v1/itemcards HTTP/1.1" 200 None
+2023-03-20 22:55:53,658 - Starting new HTTPS connection (1): api-lec.superfantasylol.com:443
+2023-03-20 22:55:53,770 - https://api-lec.superfantasylol.com:443 "GET /api/v1/playerinfos HTTP/1.1" 200 None
+2023-03-20 22:55:53,823 - Starting new HTTPS connection (1): api-lec.superfantasylol.com:443
+2023-03-20 22:55:53,976 - https://api-lec.superfantasylol.com:443 "GET /api/v1/gamedays HTTP/1.1" 200 None
+2023-03-20 22:55:53,983 - Using selector: EpollSelector
+2023-03-20 22:55:57,979 - zip créé
+2023-03-20 22:56:03,004 - release lec terminé
+2023-03-20 22:56:03,013 - Starting new HTTPS connection (1): api-lfl.superfantasylol.com:443
+2023-03-20 22:56:03,346 - https://api-lfl.superfantasylol.com:443 "GET /api/v1/gamedays HTTP/1.1" 200 None
+2023-03-20 22:56:03,366 - Check end gameday lfl
+2023-03-20 22:56:03,372 - Aucun match n'est prévu aujourd'hui
+2023-03-20 22:56:03,373 - lfl {'matchDay': False, 'dayFinished': False}
+2023-03-20 22:56:03,382 - Starting new HTTPS connection (1): api-superliga.superfantasylol.com:443
+2023-03-20 22:56:03,660 - https://api-superliga.superfantasylol.com:443 "GET /api/v1/gamedays HTTP/1.1" 200 None
+2023-03-20 22:56:03,668 - Check end gameday superliga
+2023-03-20 22:56:03,670 - Aucun match n'est prévu aujourd'hui
+2023-03-20 22:56:03,671 - superliga {'matchDay': False, 'dayFinished': False}
+2023-03-20 22:56:03,671 - isFinished {'lec': True, 'lfl': True, 'superliga': True}
+2023-03-20 22:56:03,671 - allFinished True
+2023-03-20 22:56:03,672 - check release n°2 : False
