@@ -1,4 +1,5 @@
 #/bin/python3
+import sys
 import json
 import os
 import shutil
@@ -10,116 +11,111 @@ import aiohttp
 import itertools
 import time
 import logging
-
-TOP = 0
-JUNGLE = 1
-MID = 2
-ADC = 3
-SUPP = 4
-COACH = 5
+import git
+from src.constants import base_path, data_path, data_ligues_path, TOP, JUNGLE, MID, ADC, SUPP, COACH, ligues, roles, ligues_headers
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)
 pd.set_option('display.max_colwidth', None)
-
-
-project_path = '~/Documents/FantasyStatsScripts'
-base_path = os.path.expanduser(project_path)
-data_path = os.path.join(base_path, 'FantasyStats')
-
 logging.basicConfig(filename=f'{base_path}/fantasy.log', filemode='a', format='%(asctime)s - %(message)s', level=logging.DEBUG)
 
+def init():
+    global ligues
+    if len(sys.argv) > 2:
+        ligues = [sys.argv[2]]
+    for ligue in ligues: init_data_league(ligue)
 
-def initData(cookie):
+def release():
+    global ligues
+    if len(sys.argv) > 2:
+        ligues = [sys.argv[2]]
+    for ligue in ligues: release_ligue(ligue, roles)
+
+def autorelease():
+    debug = False
+    if len(sys.argv) > 2 and sys.argv[2] == 'debug':
+        debug = True
+    auto_release_ligue(ligues, roles, debug)
+
+def check():
+    for ligue in ligues: 
+        result = check_end_gameday(ligue)
+        print(ligue, result)
+
+def ligue_stats():
+    global roles
+    if len(sys.argv) > 2:
+        roles = [sys.argv[2]]
+    for role in roles: get_stats(role, sys.argv[1], 'show')
+
+def init_folders(ligue):
+    print(f'Checking folders for ligue : {data_ligues_path.get(ligue)}')
+    if not os.path.exists(data_ligues_path.get(ligue)):
+        print(f'Creating folder')
+        os.makedirs(data_ligues_path.get(ligue))
+    else :
+        print('Folder already exists')
+        
+def init_data():
     ligues = ['lec', 'lfl', 'superliga']
 
     for ligue in ligues:
-        getItems(ligue, cookie)
-        getPlayers(ligue, cookie)
-        getMatchs(ligue, cookie)
-        # getGamesResult(ligue, cookie)
-        asyncio.run(get_game_result(ligue, cookie))
+        init_folders(ligue)
+        get_items(ligue)
+        get_players(ligue)
+        get_matchs(ligue)
+        # get_game_result(ligue)
+        asyncio.run(get_game_result(ligue))
 
-def initDataLeague(cookie, ligue):
+def init_data_league(ligue):
     try:
         print('Importation des données pour la ligue : ' + ligue)
         logging.info('Importation des données pour la ligue : ' + ligue)
-        getItems(ligue, cookie)
-        getPlayers(ligue, cookie)
-        getMatchs(ligue, cookie)
-        # getGamesResult(ligue, cookie)
-        asyncio.run(get_game_result(ligue, cookie))
+        init_folders(ligue)
+        get_items(ligue)
+        get_players(ligue)
+        get_matchs(ligue)
+        # get_game_result(ligue)
+        asyncio.run(get_game_result(ligue))
     except Exception as e:
         print(e)
         logging.error(e)
 
-def getItems(ligue, cookie):
-    if ligue == 'superliga':
-        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/itemcards', headers={
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': 'https://' + 'lvp' + '.superfantasylol.com',
-            'referer': 'https://' + 'lvp' + '.superfantasylol.com/',
-            'content-language': 'fr'
-        })
-    else :
-        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/itemcards', headers={
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': 'https://' + ligue + '.superfantasylol.com',
-            'referer': 'https://' + ligue + '.superfantasylol.com',
-            'content-language': 'fr'
-
-        })
+def get_items(ligue):
+    url = f'https://api-{ligue}.superfantasylol.com/api/v1/itemcards'
+    headers = ligues_headers.get(ligue)
+    r = requests.get(url, headers=headers)
     result = json.loads(r.text)
 
     # ecriture des logs
-    os.chdir(base_path)
-    with open(ligue + '-items2.json', 'w+') as outfile:
+    path = data_ligues_path.get(ligue)
+    os.chdir(path)
+    with open('items.json', 'w+') as outfile:
         json.dump(result.get('data'), outfile, default=str)
 
     print('Items ' + ligue + ' importés')
 
 
-def getPlayers(ligue, cookie):
-    if ligue == 'superliga':
-        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/playerinfos', headers={
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': 'https://' + 'lvp' + '.superfantasylol.com',
-            'referer': 'https://' + 'lvp' + '.superfantasylol.com/',
-            'content-language': 'fr'
-        })
-    else :
-        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/playerinfos', headers={
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': 'https://' + ligue + '.superfantasylol.com',
-            'referer': 'https://' + ligue + '.superfantasylol.com',
-            'content-language': 'fr'
-        })
+def get_players(ligue):
+    url = f'https://api-{ligue}.superfantasylol.com/api/v1/playerinfos'
+    headers = ligues_headers.get(ligue)
+    r = requests.get(url, headers=headers)
     result = json.loads(r.text)
 
     # ecriture des logs
-    os.chdir(base_path)
-    with open(ligue + '-players.json', 'w+') as outfile:
+    path = data_ligues_path.get(ligue)
+    os.chdir(path)
+    with open('players.json', 'w+') as outfile:
         json.dump(result.get('data'), outfile, default=str)
 
     print('Players ' + ligue + ' importés')
 
 
-def getMatchs(ligue, cookie):
-    if ligue == 'superliga':
-        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/gamedays', headers={
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': 'https://' + 'lvp' + '.superfantasylol.com',
-            'referer': 'https://' + 'lvp' + '.superfantasylol.com/',
-            'content-language': 'fr'
-        })
-    else :
-        r = requests.get('https://api-' + ligue + '.superfantasylol.com/api/v1/gamedays', headers={
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': 'https://' + ligue + '.superfantasylol.com',
-            'referer': 'https://' + ligue + '.superfantasylol.com/',
-            'content-language': 'fr'
-        })
+def get_matchs(ligue):
+    url = f'https://api-{ligue}.superfantasylol.com/api/v1/gamedays'
+    headers = ligues_headers.get(ligue)
+    r = requests.get(url, headers=headers)
     result = json.loads(r.text).get('data')
     gamesId = []
     for game in result:
@@ -130,30 +126,16 @@ def getMatchs(ligue, cookie):
     gamesId.reverse()
 
     # #ecriture des logs
-    os.chdir(base_path)
-    with open(ligue + '-matchs.json', 'w+') as outfile:
+    path = data_ligues_path.get(ligue)
+    os.chdir(path)
+    with open('matchs.json', 'w+') as outfile:
         json.dump(gamesId, outfile, default=str)
 
     print('Matchs ' + ligue + ' importés')
 
-async def fetch_game_result(session, ligue, cookie, id):
-    if ligue == 'superliga':
-        url = f'https://api-{ligue}.superfantasylol.com/api/v1/games/{id}'
-        headers = {
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': f'https://lvp.superfantasylol.com',
-            'referer': f'https://lvp.superfantasylol.com/',
-            'content-language': 'fr'
-        }
-    else:
-        url = f'https://api-{ligue}.superfantasylol.com/api/v1/games/{id}'
-        headers = {
-            'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-            'origin': f'https://{ligue}.superfantasylol.com',
-            'referer': f'https://{ligue}.superfantasylol.com/',
-            'content-language': 'fr'
-        }
-
+async def fetch_game_result(session, ligue, id):
+    url = f'https://api-{ligue}.superfantasylol.com/api/v1/games/{id}'
+    headers = ligues_headers.get(ligue)
     async with session.get(url, headers=headers) as response:
         result = await response.json()
         data = result.get('data')
@@ -235,13 +217,14 @@ async def fetch_game_result(session, ligue, cookie, id):
         else:
             return None
 
-async def get_game_result(ligue, cookie):
-    os.chdir(base_path)
-    with open(f'{ligue}-matchs.json') as data:
+async def get_game_result(ligue):
+    path = data_ligues_path.get(ligue)
+    os.chdir(path)
+    with open('matchs.json') as data:
         matchesId = json.load(data)
     
     async with aiohttp.ClientSession() as session:
-        tasks = [fetch_game_result(session, ligue, cookie, id) for id in matchesId]
+        tasks = [fetch_game_result(session, ligue, id) for id in matchesId]
         results = await asyncio.gather(*tasks)
 
         top = list(itertools.chain.from_iterable([result.get('top') for result in results if result is not None]))
@@ -259,20 +242,21 @@ async def get_game_result(ligue, cookie):
         'support': support,
         'coach': coach
     }
-    with open(f'{ligue}-itemsResults2.json', 'w+') as results_file:
+    with open('items-results.json', 'w+') as results_file:
         json.dump(result, results_file, default=str)
 
     print(f'Games results {ligue} importés')
 
 
-def getStats(role, ligue, action):
-    os.chdir(base_path)
-    with open('./' + ligue + '-itemsResults2.json') as results:
+def get_stats(role, ligue, action):
+    path = data_ligues_path.get(ligue)
+    os.chdir(path)
+    with open('items-results.json') as results:
         roleResult = []
         for result in json.load(results).get(role):
             roleResult.append(result.get('items'))
         # print(roleResult)
-    with open('./' + ligue + '-items2.json') as items:
+    with open('items.json') as items:
         object = {}
         itemsData = json.load(items)
         for item in itemsData:
@@ -329,9 +313,10 @@ def getStats(role, ligue, action):
                                                                                     index=True)
 
 
-def getStatsByPlayer(role, ligue):
-    os.chdir(base_path)
-    with open(ligue + '-players.json') as players:
+def get_stats_by_player(role, ligue):
+    path = data_ligues_path.get(ligue)
+    os.chdir(path)
+    with open('players.json') as players:
         playersData = json.load(players)
         playersByRole = []
         for player in playersData:
@@ -342,14 +327,14 @@ def getStatsByPlayer(role, ligue):
             playerNickname = player.get('nickname')
             # print(playerNickname)
 
-            os.chdir(base_path)
-            with open('./' + ligue + '-itemsResults2.json') as results:
+            os.chdir(path)
+            with open('items_results.json') as results:
                 roleResult = []
                 for result in json.load(results).get(role):
                     if result.get('playerId') == playerNickname:
                         roleResult.append(result.get('items'))
                 # print(roleResult)
-            with open('./' + ligue + '-items2.json') as items:
+            with open('items.json') as items:
                 object = {}
                 itemsData = json.load(items)
                 for item in itemsData:
@@ -408,33 +393,35 @@ def zip_files(ligue):
 
 
 def release(ligue):
+    logging.info(f"Starting release {ligue}")
+    print(f"Starting release {ligue}")
     tag = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    os.chdir(data_path)
-    os.system(f'git add {ligue}')
-    os.system(f'git commit -m "release {ligue}"')
-    os.system('git pull')
-    os.system('git push')
-    os.system('git tag ' + tag)
-    os.system('git push --tags')
+    repo = git.Repo(data_path)
+    repo.config_writer().set_value("user", "name", "RICHARD-Quentin")
+    repo.git.add(ligue)
+    repo.index.commit(f"release {ligue}")
+    repo.remotes.origin.pull()
+    repo.remotes.origin.push()
+    tag = repo.create_tag(f"release-{ligue}-{datetime.now().strftime('%Y%m%d-%H%M%S')}")
+    repo.remotes.origin.push(tag)
     logging.info('release ' + ligue + ' terminé')
     print(f'Release {ligue} terminé')            
 
 
-
-def release_ligue(ligue, roles, cookie):
+def release_ligue(ligue, roles):
     try:
         logging.info('release ligue ' + ligue)
-        initDataLeague(cookie, ligue)
+        init_data_league(ligue)
         for role in roles:
-            getStats(role, ligue, 'register')
-            getStatsByPlayer(role, ligue)
+            get_stats(role, ligue, 'register')
+            get_stats_by_player(role, ligue)
         zip_files(ligue)
         release(ligue)
     except Exception as e:
         logging.error('release ' + ligue + ' échoué')
         logging.error(e)
 
-def auto_release_ligue(ligues, roles, cookie):
+def auto_release_ligue(ligues, roles, debug):
     checkRelease = True
     counter = 1
     logging.info('auto release')
@@ -443,12 +430,16 @@ def auto_release_ligue(ligues, roles, cookie):
         logging.info('check release n°' + str(counter))
         logging.info('isFinished ' + str(isFinished))
         for ligue in ligues:
+            if debug:
+                release_ligue(ligue, roles)
+                break
             if isFinished[ligue]:
                 continue
-            result = check_end_gameday(ligue, cookie)
+            result = check_end_gameday(ligue)
             logging.debug(ligue + ' ' + str(result))
+
             if result['matchDay'] and result['dayFinished']:
-                release_ligue(ligue, roles, cookie)
+                release_ligue(ligue, roles)
                 isFinished[ligue] = True
             if not result['matchDay']:
                 isFinished[ligue] = True
@@ -457,20 +448,13 @@ def auto_release_ligue(ligues, roles, cookie):
         checkRelease = not all(isFinished.values())
         counter += 1
         logging.info('check release n°' + str(counter) + ' : ' + str(checkRelease))
-        time.sleep(30)
+        time.sleep(600)
+        if debug:
+            break
 
-def check_end_gameday(ligue, cookie):
-    if ligue == 'superliga':
-        headersLeague= 'lvp'
-    else :
-        headersLeague= ligue
+def check_end_gameday(ligue):
     url = f'https://api-{ligue}.superfantasylol.com/api/v1/gamedays'
-    headers={
-    'cookie': cookie.replace(u"\u2018", "'").replace(u"\u2019", "'"),
-    'origin': f'https://{headersLeague}.superfantasylol.com',
-    'referer': f'https://{headersLeague}.superfantasylol.com',
-    'content-language': 'fr'
-}
+    headers = ligues_headers.get(ligue)
     try:
         r = requests.get(url, headers=headers)
         r.raise_for_status()
