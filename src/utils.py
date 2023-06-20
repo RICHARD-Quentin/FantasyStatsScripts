@@ -328,7 +328,7 @@ def get_stats_by_player(role, ligue):
             # print(playerNickname)
 
             os.chdir(path)
-            with open('items_results.json') as results:
+            with open('items-results.json') as results:
                 roleResult = []
                 for result in json.load(results).get(role):
                     if result.get('playerId') == playerNickname:
@@ -392,7 +392,7 @@ def zip_files(ligue):
     shutil.move(ligue + '.zip', './' + ligue + '/' + ligue + '.zip')
 
 
-def release(ligue):
+def release_data(ligue):
     logging.info(f"Starting release {ligue}")
     print(f"Starting release {ligue}")
     tag = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
@@ -416,7 +416,7 @@ def release_ligue(ligue, roles):
             get_stats(role, ligue, 'register')
             get_stats_by_player(role, ligue)
         zip_files(ligue)
-        release(ligue)
+        release_data(ligue)
     except Exception as e:
         logging.error('release ' + ligue + ' échoué')
         logging.error(e)
